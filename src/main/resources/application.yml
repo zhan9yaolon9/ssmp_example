@@ -1,0 +1,61 @@
+server:
+  port: 80
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mybatisplus?serverTimezone=Asia/Shanghai&tinyInt1isBit=false
+    username: root
+    password: root
+  main:
+    allow-circular-references: true #循环错误 ？
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+#  profiles:
+#    #    active: release
+#    active: dev
+#  jdbc:
+#    template:
+#      query-timeout: -1 #查询超时时间
+#      max-rows: 500 #最大行数
+#      fetch-size: -1 #缓存行数
+
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    # 默认使用lettucs客户端技术，也可以配置如下jedis客户端技术
+#    client-type: jedis
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost/test
+#  elasticsearch:
+#    rest:
+#      uris: http://localhost:9200
+
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: tbl_
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #console显示sql语句
+  #路径匹配
+  mvc:
+     pathmatch:
+        matching-strategy: ant_path_matcher
+
+#----------------swagger配置-----------------------
+#swagger:
+#  #生产环境改为false（改为false后swagger-ui.html则无法访问）
+#  enable: true
+##解决Swagger2 异常 NumberFormatException:For input string:""
+#logging:
+#  level:
+#    io:
+#      swagger:
+#        models:
+#          parameters:
+#            AbstractSerializableParameter: ERROR
+
+
