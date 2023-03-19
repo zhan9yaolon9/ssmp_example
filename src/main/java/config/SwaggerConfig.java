@@ -37,6 +37,5 @@ public class SwaggerConfig {
                 //服务条款网址
                 .termsOfServiceUrl("https://localhost:80/test")
                 .build();
-
     }
 }
