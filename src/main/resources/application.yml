@@ -40,10 +40,7 @@ mybatis-plus:
       id-type: auto
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #console显示sql语句
-  #路径匹配
-  mvc:
-     pathmatch:
-        matching-strategy: ant_path_matcher
+
 
 #----------------swagger配置-----------------------
 #swagger:

@@ -1,26 +1,23 @@
 package service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import config.RestResult;
 import dao.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import pojo.Book;
-import pojo.User;
 
 import java.util.List;
 
 @Service
-public class BookServiceImpl implements BookService {
-
+public class BookServiceImpl extends ServiceImpl<BookDao, Book> implements BookService {
     @Autowired
     private BookDao bookDao;
-
+    
     @Override
-    public RestResult save(Book book) {
+    public RestResult saveBook(Book book) {
         int i = bookDao.insert(book);
         if(i > 0){
             return new RestResult(200,"增加成功");
@@ -66,10 +63,14 @@ public class BookServiceImpl implements BookService {
         return bookDao.selectList(null);
     }
 
+   @Override
+	public List<Book> findByPage(Integer pageNow, Integer rows) {
+    	int start = (pageNow-1)*rows;
+    	return bookDao.findByPage(start,rows);
+  }
+
     @Override
-    public IPage<Book> getPage(int currentPage, int pageSize) {
-        IPage page = new Page(currentPage,pageSize);
-        bookDao.selectPage(page,null);
-        return page;
+    public Long getBookTotal() {
+        return bookDao.getBookTotal();
     }
 }

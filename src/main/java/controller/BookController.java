@@ -1,6 +1,5 @@
 package controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import config.R;
 import config.RestResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import pojo.Book;
 import service.BookService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController //使用restful
 @RequestMapping("/books")
@@ -26,8 +27,8 @@ public class BookController {
 
     //@ApiOperation("保存书本数据")
     @PostMapping("save")
-    public RestResult save(@RequestBody Book book){
-        return bookService.save(book);
+    public RestResult saveBook(@RequestBody Book book){
+        return bookService.saveBook(book);
     }
 
     //@ApiOperation("更新书本数据")
@@ -50,11 +51,30 @@ public class BookController {
         return new R(true,book);
     }
 
-   // @ApiOperation("页数？")
-    @GetMapping("{currentPage}/{pageSize}")
-    public R getPage(@PathVariable int currentPage, @PathVariable int pageSize){
-        IPage<Book> page = bookService.getPage(currentPage,pageSize);
-        return new R(true,page);
+    /**
+     * 分页功能 根据pageNow当前页数和pageSize数据的数量
+     * @param pageNow
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("findByPage")
+    public Map<String, Object> findByPage(String pageNow, String pageSize) {
+        Map<String, Object> result = new HashMap<>();
+        int page = 0;
+        int size = 0;
+        try {
+            page = Integer.parseInt(pageNow);
+            size = Integer.parseInt(pageSize);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        //这里我们做一个初始化页面定义，防止空指针错误
+        page = page <= 0 ? 1 : page;
+        size = size <= 0 ? 4 : size;
+        List<Book> books = bookService.findByPage(page, size);
+        Long total = bookService.getBookTotal();
+        result.put("books", books);
+        result.put("total", total);
+        return result;
     }
-
 }

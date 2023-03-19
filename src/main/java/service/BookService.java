@@ -1,18 +1,18 @@
 package service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
 import config.RestResult;
-import org.apache.ibatis.annotations.Mapper;
 import pojo.Book;
 
 import java.util.List;
 
 
-public interface BookService {
-    RestResult save(Book book);
+public interface BookService extends IService<Book> {
+    RestResult saveBook(Book book);
     RestResult update(Book book);
     RestResult delete(int id);
     public Book getById(Integer id);
     List<Book> getAll();
-    IPage<Book> getPage(int currentPage, int pageSize);
+    List<Book> findByPage(Integer start, Integer rows);
+    Long getBookTotal();
 }
