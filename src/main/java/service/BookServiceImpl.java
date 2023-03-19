@@ -15,7 +15,7 @@ import java.util.List;
 public class BookServiceImpl extends ServiceImpl<BookDao, Book> implements BookService {
     @Autowired
     private BookDao bookDao;
-    
+
     @Override
     public RestResult saveBook(Book book) {
         int i = bookDao.insert(book);

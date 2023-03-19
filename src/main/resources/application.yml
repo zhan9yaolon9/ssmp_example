@@ -11,7 +11,7 @@ spring:
     allow-circular-references: true #循环错误 ？
   mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: PATH_PATTERN_PARSER
 #  profiles:
 #    #    active: release
 #    active: dev
