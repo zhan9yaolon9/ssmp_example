@@ -41,18 +41,10 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #console显示sql语句
 
-
-#----------------swagger配置-----------------------
-#swagger:
-#  #生产环境改为false（改为false后swagger-ui.html则无法访问）
-#  enable: true
-##解决Swagger2 异常 NumberFormatException:For input string:""
-#logging:
-#  level:
-#    io:
-#      swagger:
-#        models:
-#          parameters:
-#            AbstractSerializableParameter: ERROR
+jwt:
+  #过期时间：2小时
+  expire: 7200000
+  #密钥
+  secret: secret99
 
 
