@@ -1,9 +1,11 @@
 package controller;
 
-import config.ApiJson;
 import config.RestResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pojo.User;
 import service.UserService;
 
@@ -18,8 +20,6 @@ public class UserController {
         return userService.login(user);
     }
 
-    @PostMapping("/loginjwt")
-    public ApiJson loginjwt(@RequestBody User user) {
-        return userService.loginjwt(user);
-    }
+
+
 }

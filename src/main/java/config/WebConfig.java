@@ -28,6 +28,6 @@ public class WebConfig implements WebMvcConfigurer {
         // 需拦截的路径
         interceptorRegistration.addPathPatterns("/**");
         // 需放行的路径
-        interceptorRegistration.excludePathPatterns("/**/loginjwt");
+        interceptorRegistration.excludePathPatterns("/**/loginjwt","/**/login");
     }
 }
